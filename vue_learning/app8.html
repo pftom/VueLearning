@@ -9,61 +9,25 @@
 </head>
 <body>
     <div id="app-8">
-        <input 
-            v-model="newTodoText"
-            v-on:keyup.enter="addNewTodo"
-            placeholder="Add a todo"
-        >
-        <ul>
-            <li
-                is="todo-item"
-                v-for="(todo, index) in todos"
-                v-bind:key="todo.id"
-                v-bind:title="todo.title"
-                v-on:remove="todos.splice(index, 1)"
-            >
-
-            </li>
-        </ul>
+        <input v-model="parentMsg">
+        <child :my-message="parentMsg"></child>
     </div>
 
 
     <script>
-        // Vue.component('todo-item', {
-        //     template: //我真想一巴掌，
-        // })
+        Vue.component('child', {
+            props: ['myMessage'],
+            template: '<span>{{ myMessage }}</span>'
+        })
 
 
         var vm = new Vue({
             el: '#app-8',
             data: {
-                newTodoText: '',
-                todos: [
-                    {
-                        id: 1,
-                        title: 'Do the dishes',
-                    },
-                    {
-                        id: 2,
-                        title: 'Take out the trash',
-                    },
-                    {
-                        id: 3,
-                        title: 'Mow the lawn',
-                    },
-                ],
-                nextTodoIt: 4,
+                parentMsg: 'hhhh'
             },
-            methods: {
-                addNewTodo: function () {
-                    this.todos.push({
-                        id: this.nextTodoId++,
-                        title: this.newTodoText,
-                    })
-                    this.newTodoText = ''
-                }
-            }
         })
+
     </script>
 </body>
 </html>
